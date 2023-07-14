@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:InternalApiTool"
+             x:DataType="local:RunningAppsViewModel"
+             x:Class="InternalApiTool.RunningAppsPage"
+             Title="Currently Running and Active Apps" 
+             BackgroundColor="AliceBlue">
+
+    <Grid>
+        <ActivityIndicator IsRunning="{Binding IsLoading}"
+                           IsVisible="True"
+                           HorizontalOptions="Center"
+                           VerticalOptions="Center" />
+
+        <StackLayout Margin="30, 10, 30, 20" IsVisible="{Binding ContentIsVisible}">
+       
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
+                <ColumnDefinition Width="30*" />
+            </Grid.ColumnDefinitions>
+            <Label Margin="3" Grid.Column="0" Grid.Row="0" Text="NAME" FontAttributes="Bold"  HorizontalOptions="Center" />
+            <Label Margin="3" Grid.Column="1" Grid.Row="0" Text="RANK" FontAttributes="Bold" HorizontalOptions="Center" />
+            <Label Margin="3" Grid.Column="2" Grid.Row="0" Text="MACHINE" FontAttributes="Bold" HorizontalOptions="Center" />
+        </Grid>
+
+        <ListView ItemsSource="{Binding RunningApps}" BackgroundColor="Transparent">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid x:DataType="local:RunningApp">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="30*" />
+                                <ColumnDefinition Width="30*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Margin="10" Grid.Column="0" HorizontalOptions="Center" Text="{Binding Name}"/>
+                            <Label Margin="10" Grid.Column="1" HorizontalOptions="Center" Text="{Binding Rank}"/>
+                            <Label Margin="10" Grid.Column="2" HorizontalOptions="Center" Text="{Binding MachineName}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+            
+    </StackLayout>
+    </Grid>    
+</ContentPage>
